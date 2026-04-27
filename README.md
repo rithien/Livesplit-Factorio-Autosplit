@@ -1,0 +1,24 @@
+# Factorio AutoSplitter
+
+LiveSplit Auto Splitter (`.asl`) for Factorio (Steam, Space Age).
+
+## Features
+
+- **Automatic timer start** based on `Map.tick` — starts on the first non-zero tick of a fresh save and also when LiveSplit attaches to an already-running save.
+- **Game-time synchronized with the engine** — timer reads `tick / 60.0`; freezes during pause / loading screens because the tick itself freezes.
+- **Per-milestone splits** for the technologies listed in `technologies.lua` (Nauvis + Space Age planets + Solar System Edge).
+- **Out-of-order tolerant splitter** — researching technologies in any order auto-skips intermediate segments (filled with `—`) instead of mis-splitting.
+- **Per-milestone toggles** — every milestone has its own checkbox in the LiveSplit settings.
+- **No baked-in tech IDs** — the script resolves technology IDs at runtime by scanning `TechnologyMap.entries` and reading `prototype.name`, so it works with any mod loadout without regeneration.
+- **AOB-anchored** — the `Map*` pointer chain is found through an AOB signature on `GlobalContext::getGameSafe`, so the script survives ASLR and minor patches.
+
+## Install
+
+1. Open LiveSplit → Edit Splits → set Game Name to `Factorio`.
+2. Browse and select `factorio.asl` as the auto-splitter script.
+3. (Recommended) Load `factorio_splits.lss` for the matching segment list and icons.
+4. Set Compare Against → Game Time (the script forces this on startup anyway).
+
+## Tested build
+
+`factorio.exe` Steam Space Age — SHA256 `dfdf4a206141fa4af8ad48f46c87b865c4b681d6bc420e0ca6f5f1c0812873bb`. Other builds may work as long as the AOB signatures resolve; if the timer never starts, the binary likely diverged and the memory map needs an update.
