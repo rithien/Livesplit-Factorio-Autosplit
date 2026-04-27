@@ -19,6 +19,10 @@ LiveSplit Auto Splitter (`.asl`) for Factorio (Steam, Space Age).
 3. (Recommended) Load `factorio_splits.lss` for the matching segment list and icons.
 4. Set Compare Against → Game Time (the script forces this on startup anyway).
 
+## Customizing splits
+
+You can freely delete, reorder, or skip any segments in `factorio_splits.lss` — the splitter does not care about order or completeness. **However, segment names must be preserved verbatim.** The script matches each segment to a technology by its exact name (e.g. `Steam Power`, `Agricultural Science Pack`); renaming a segment breaks the match and the split for that milestone will silently never fire. The trig ID form (e.g. `trig_steam_power`) is also accepted as a segment name if you prefer that style.
+
 ## Tested build
 
 `factorio.exe` Steam Space Age — SHA256 `dfdf4a206141fa4af8ad48f46c87b865c4b681d6bc420e0ca6f5f1c0812873bb`. Other builds may work as long as the AOB signatures resolve; if the timer never starts, the binary likely diverged and the memory map needs an update.
